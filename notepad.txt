@@ -1,0 +1,8 @@
+python3 -m venv venv - יצירת סביבת פייטון לאפליקציה שלי
+pip freeze > requirements.txt -  used to create a requirements.txt file that lists all the Python packages and their versions currently installed in your environment.
+
+
+The command npm init -y is used to quickly create a new package.json file with default values. It automates the initialization process by skipping the interactive prompts, saving you time when setting up a new Node.js project.
+
+
+venv must be in .dockerignore to build image.. (i use python alpine so no need venv in image..)
