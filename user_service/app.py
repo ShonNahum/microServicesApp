@@ -1,23 +1,39 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="static")
 
-@app.route('/health', methods=['GET'])
+# In-memory user database
+users = {
+    1: {"name": "User 1", "email": "user1@example.com", "payment": 0},
+    2: {"name": "User 2", "email": "user2@example.com", "payment": 0},
+}
+
+@app.route("/users/<int:user_id>", methods=["GET"])
+def get_user(user_id):
+    if user_id not in users:
+        return jsonify({"error": "User not found"}), 404
+    return jsonify(users[user_id])
+
+@app.route("/users/<int:user_id>/update-payment", methods=["POST"])
+def update_payment(user_id):
+    if user_id not in users:
+        return jsonify({"error": "User not found"}), 404
+
+    data = request.get_json()
+    payment = data.get("payment", 0)
+
+    # Update the user's payment
+    users[user_id]["payment"] = payment
+
+    return jsonify({"message": "Payment updated", "user": users[user_id]}), 200
+
+@app.route("/", methods=["GET"])
+def index():
+    return render_template("web.html", users=users)
+
+@app.route("/health", methods=["GET"])
 def health():
-    return jsonify({'status': 'healthy'})
+    return jsonify({"status": "User Service is healthy"})
 
-@app.route('/status', methods=['GET'])
-def status():
-    return jsonify({'service': 'user_service', 'status': 'running'})
-
-@app.route('/users', methods=['GET', 'POST'])
-def users():
-    if request.method == 'GET':
-        # Mock users list
-        return jsonify({'users': ['user1', 'user2']})
-    elif request.method == 'POST':
-        data = request.json
-        return jsonify({'message': 'User added', 'user': data}), 201
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)

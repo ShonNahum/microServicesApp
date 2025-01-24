@@ -1,23 +1,44 @@
-const express = require('express');
+const express = require("express");
+const axios = require("axios");
+const path = require("path");
 const app = express();
 
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "public")));
 
-app.get('/health', (req, res) => {
-    res.json({ status: 'healthy' });
+const payments = []; // In-memory payments database
+
+// Endpoint to handle payment
+app.post("/payments", async (req, res) => {
+    const { userId, amount } = req.body;
+
+    if (!userId || !amount) {
+        return res.status(400).json({ error: "Missing userId or amount" });
+    }
+
+    // Save payment locally
+    payments.push({ userId, amount });
+
+    // Send the payment info to the User Service
+    try {
+        const userServiceUrl = `http://user_service:5000/users/${userId}/update-payment`;
+        await axios.post(userServiceUrl, { payment: amount });
+        res.status(200).json({ message: "Payment processed and user updated" });
+    } catch (error) {
+        console.error("Error communicating with User Service:", error.message);
+        res.status(500).json({ error: "Failed to update user payment" });
+    }
 });
 
-app.get('/status', (req, res) => {
-    res.json({ service: 'payment_service', status: 'running' });
+// Serve HTML UI
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "web.html"));
 });
 
-app.route('/payments')
-    .get((req, res) => {
-        res.json({ payments: ['payment1', 'payment2'] });
-    })
-    .post((req, res) => {
-        const payment = req.body;
-        res.status(201).json({ message: 'Payment added', payment });
-    });
+// Health check endpoint
+app.get("/health", (req, res) => {
+    res.json({ status: "Payment Service is healthy" });
+});
 
-app.listen(5001, () => console.log('Payment service running on port 5001'));
+const PORT = 3000;
+app.listen(PORT, () => console.log(`Payment Service running on port ${PORT}`));

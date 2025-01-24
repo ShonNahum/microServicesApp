@@ -6,3 +6,4 @@ The command npm init -y is used to quickly create a new package.json file with d
 
 
 venv must be in .dockerignore to build image.. (i use python alpine so no need venv in image..)
+
