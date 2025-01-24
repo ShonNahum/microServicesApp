@@ -1,0 +1,30 @@
+
+pipeline {
+    agent {
+        docker {
+            image 'python:3.9-slim'
+        }
+    }
+    stages {
+        stage('Build') {
+            steps {
+                script {
+                    sh 'pip install -r requirements.txt'
+                    sh 'python -m unittest discover'
+                }
+            }
+        }
+        stage('Containerize') {
+            steps {
+                script {
+                    sh 'docker build -t your_dockerhub_user/your_image:latest .'
+                }
+            }
+        }
+    }
+    post {
+        always {
+            echo 'Pipeline Completed!'
+        }
+    }
+}
