@@ -21,7 +21,7 @@ app.post("/payments", async (req, res) => {
 
     // Send the payment info to the User Service
     try {
-        const userServiceUrl = `http://user_service:5000/users/${userId}/update-payment`;
+        const userServiceUrl = `http://user_add:5000/users/${userId}/update-payment`;
         await axios.post(userServiceUrl, { payment: amount });
         res.status(200).json({ message: "Payment processed and user updated" });
     } catch (error) {

@@ -1,8 +1,30 @@
 services:
-  user_service:
+
+  user_view:
     build:
-      context: ./user_service
-    container_name: user_service
+      context: ./user_view
+    container_name: user_view
+    ports:
+      - "5001:5001"
+    depends_on:
+      mysql_db:
+        condition: service_healthy
+    environment:
+      - DB_HOST=mysql_db
+      - DB_PORT=3306
+      - DB_NAME=user_service_db
+      - DB_USER=root
+      - DB_PASSWORD=rootpassword
+      - FLASK_ENV=development
+    networks:
+      - microservices_net
+
+
+
+  user_add:
+    build:
+      context: ./user_add
+    container_name: user_add
     ports:
       - "5000:5000"
     depends_on:
