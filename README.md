@@ -10,4 +10,7 @@ docker-compsoe up -d
 
 in dockerhub:
 https://hub.docker.com/repository/docker/shonnahum/microservices/general
+
 (docker pull shonnahum/microservices)
+
+-  [X] 3 services microservices connected with API calls 
