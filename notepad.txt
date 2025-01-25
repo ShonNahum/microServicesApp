@@ -33,3 +33,11 @@ ssh -T git@github.om
 will work and not give public key denied
 
 In the Jenkins Pipline i Connected my GitHub so i can take the Jenkinsfiles from there..
+
+
+Kubernetes:
+because i use NodePort, to see it in Public Web: i use:
+minikube service --all --url
+minikube service list - to see all my services
+
+** Only payment service work -- need to check it --***
