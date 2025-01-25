@@ -24,7 +24,7 @@ pipeline {
                     // Change to the project/user_service directory
                     dir("${env.USER_SERVICE_DIR}") {
                         // Build the Docker image using the Dockerfile inside the user_service folder
-                        sh 'docker build -t user_view_image_from_Jenkins .'
+                        sh 'docker build -t user_view_image_from_jenkins .'
                     }
                 }
             }
