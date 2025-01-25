@@ -2,8 +2,8 @@ pipeline {
     agent any
     environment {
         // Define the full path of the micro service project inside the project
-[        USER_SERVICE_DIR = 'payment_service'
-]    }
+        USER_SERVICE_DIR = 'payment_service'
+    }
     stages {
         stage('Print Message') {
             steps {
