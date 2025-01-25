@@ -2,8 +2,8 @@ pipeline {
     agent any
     environment {
         // Define the full path of the micro service project inside the project
-        USER_SERVICE_DIR = 'user_view'
-    }
+[        USER_SERVICE_DIR = 'payment_service'
+]    }
     stages {
         stage('Print Message') {
             steps {
@@ -18,13 +18,11 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image for user_service') {
+        stage('Build Docker Image for payment_service') {
             steps {
                 script {
-                    // Change to the project/user_service directory
                     dir("${env.USER_SERVICE_DIR}") {
-                        // Build the Docker image using the Dockerfile inside the user_service folder
-                        sh 'docker build -t user_view_image_from_jenkins .'
+                        sh 'docker build -t payment_service_image_from_jenkins .'
                     }
                 }
             }

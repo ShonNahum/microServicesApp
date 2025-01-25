@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+    environment {
+        // Define the full path of the micro service project inside the project
+        USER_SERVICE_DIR = 'user_view'
+    }
+    stages {
+        stage('Print Message') {
+            steps {
+                echo 'Hello im From Shons MicroservicesApp Project!'
+            }
+        }
+
+        stage('Checkout') {
+            steps {
+                // Checkout the repository
+                checkout scm
+            }
+        }
+
+        stage('Build Docker Image for user_view') {
+            steps {
+                script {
+                    dir("${env.USER_SERVICE_DIR}") {
+                        sh 'docker build -t user_view_image_from_jenkins .'
+                    }
+                }
+            }
+        }
+
+    }
+
+}
