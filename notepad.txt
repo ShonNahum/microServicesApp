@@ -7,3 +7,27 @@ The command npm init -y is used to quickly create a new package.json file with d
 
 venv must be in .dockerignore to build image.. (i use python alpine so no need venv in image..)
 
+
+
+Jenkins:
+when i run Jenkins to connect it to my project , first of all we need ensure the Jenkins container have SSH access to git@github.com
+ssh -T git@github.om
+If prompted with a warning (e.g., The authenticity of host 'github.com' can't be established), type yes to add GitHub to the list of known hosts
+
+and have in Jenkins key for my GitHub email
+ssh-keygen -t rsa -b 4096 -C "my@email.com"
+And add the public key to GitHub:
+Go to GitHub > Settings > SSH and GPG Keys > New SSH Key.
+Paste the key and save it.
+
+----------------------------------------------
+
+- Create in Jenkins Container public and private key..
+Give to GitHub the public and the Jenkins credentials the private key & username of GitHub (with all Format Include ssh-rsa and include ---PRIVATEKEY etc..)
+And:
+Add the SSH private key to the agent:
+ssh-add /var/jenkins_home/.ssh/id_rsa
+
+Now
+ssh -T git@github.om
+will work and not give public key denied
