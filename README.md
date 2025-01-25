@@ -14,4 +14,5 @@ https://hub.docker.com/repository/docker/shonnahum/microservices/general
 (docker pull shonnahum/microservices)
 
 -  [X] 3 services microservices connected with API calls 
--  [ ] Connect to Jenkins automatically and connect my Jenkinsfile that take the 3 micro services and every Trigger, Docker image them
+-  [X] Connect to Jenkins automatically and connect my Jenkinsfile that take the 3 micro services and every Trigger, Docker image them 
+(Now only user_view is created as Docker image when i trigger Jenkins pipline)
