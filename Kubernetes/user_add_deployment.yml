@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-add-Deployment
+  labels:
+    app: user-add
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: user-add
+  template:
+    metadata:
+      labels:
+        app: user-add
+    spec:
+      containers:
+      - name: user-add
+        image: user-add:latest
+        ports:
+        - containerPort: 5000
+        envFrom:
+        - configMapRef:
+            name: microservices-config
