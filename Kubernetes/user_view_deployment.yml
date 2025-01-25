@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: user-view
-        image: user-view:latest
+        image: shonnahum/microservices:user_view
         ports:
         - containerPort: 5001
         envFrom:

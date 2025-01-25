@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: payment-service
-        image: payment-service:latest
+        image: shonnahum/microservices:payment-service
         ports:
         - containerPort: 3000
         envFrom:
