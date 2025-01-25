@@ -1,3 +1,5 @@
+MicroService Architecture (3 mini services that talk each other with API CALLS) -> Jenkins For Docker Image them and push into my Dockerhub repo -> Deploy on Kubernetes
+
 Payment Service UI: http://localhost:3000
 
 User add Service UI: http://localhost:5000
