@@ -14,4 +14,5 @@ https://hub.docker.com/repository/docker/shonnahum/microservices/general
 (docker pull shonnahum/microservices)
 
 -  [X] 3 services microservices connected with API calls 
--  [X] Connect to Jenkins automatically and connect my Jenkinsfile that take the 3 micro services and every Trigger, Docker image them 
+-  [X] Connect to Jenkins automatically and connect my Jenkinsfiles that in every Microservices Application folder and every Trigger it Docker image them and push them to my repo in dockerhub
+-  [ ] Deploy it all in Kubernetes - using deployment & Service for every Microservice project And Configmap
