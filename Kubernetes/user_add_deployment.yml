@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: user-add
-        image: shonnahum/microservices:user-add
+        image: shonnahum/microservices:user_add
         ports:
         - containerPort: 5000
         envFrom:
