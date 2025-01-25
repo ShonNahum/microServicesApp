@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: user-add-Deployment
+  name: user-add-deployment
   labels:
     app: user-add
 spec:
