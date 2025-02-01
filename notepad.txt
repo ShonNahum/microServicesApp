@@ -37,7 +37,7 @@ In the Jenkins Pipline i Connected my GitHub so i can take the Jenkinsfiles from
 
 Kubernetes:
 because i use NodePort, to see it in Public Web: i use:
-minikube service --all --url
-minikube service list - to see all my services
+kubectl get svc --all-namespaces -o wide
+kubectl get ingress --all-namespaces
 
 ** added init container for DB to create the Table my code needed to work **
