@@ -26,7 +26,7 @@ app.post("/payments", async (req, res) => {
         res.status(200).json({ message: "Payment processed and user updated" });
     } catch (error) {
         console.error("ERROR communicating with User Service:", error.message);
-        res.status(500).json({ error: "Failed to to to to update user payment" });
+        res.status(500).json({ error: "Failed to update user payment" });
     }
 });
 
