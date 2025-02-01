@@ -21,11 +21,11 @@ app.post("/payments", async (req, res) => {
 
     // Send the payment info to the User Service
     try {
-        const userServiceUrl = `http://user_add:5000/users/${userId}/update-payment`;
+        const userServiceUrl = `http://172.26.255.104:32557/users/${userId}/update-payment`;
         await axios.post(userServiceUrl, { payment: amount });
         res.status(200).json({ message: "Payment processed and user updated" });
     } catch (error) {
-        console.error("Error communicating with User Service:", error.message);
+        console.error("ERROR communicating with User Service:", error.message);
         res.status(500).json({ error: "Failed to update user payment" });
     }
 });
