@@ -40,4 +40,4 @@ because i use NodePort, to see it in Public Web: i use:
 minikube service --all --url
 minikube service list - to see all my services
 
-** Only payment service work -- need to check it --***
+** added init container for DB to create the Table my code needed to work **

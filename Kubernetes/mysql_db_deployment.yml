@@ -33,3 +33,9 @@ spec:
             - "localhost"
           initialDelaySeconds: 10
           periodSeconds: 10
+      
+      # Init Container to create the table
+      initContainers:
+      - name: init-mysql
+        image: mysql:8.0
+        command: [ "sh", "-c", "sleep 10; mysql -h 127.0.0.1 -u root -prootpassword user_service_db -e 'CREATE TABLE IF NOT EXISTS users (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), email VARCHAR(255) UNIQUE, payment DECIMAL(10,2) DEFAULT 0.00);'" ]
