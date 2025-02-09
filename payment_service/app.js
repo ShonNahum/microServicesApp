@@ -1,12 +1,19 @@
 const express = require("express");
 const axios = require("axios");
 const path = require("path");
+const mysql = require("mysql2");  // Add MySQL client
 const app = express();
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
-const payments = []; // In-memory payments database
+// Create a MySQL connection pool
+const pool = mysql.createPool({
+    host: "mysql-db",  // Change to your DB host if needed
+    user: "root",       // Change to your DB user
+    password: "rootpassword", // Change to your DB password
+    database: "user_service_db"  // Change to your DB name
+});
 
 // Endpoint to handle payment
 app.post("/payments", async (req, res) => {
@@ -17,17 +24,26 @@ app.post("/payments", async (req, res) => {
     }
 
     // Save payment locally
-    payments.push({ userId, amount });
+    // In-memory payments can be kept here if necessary
+    // payments.push({ userId, amount });
 
-    // Send the payment info to the User Service
-    try {
-        const userServiceUrl = `http://172.26.255.104:3000/users/${userId}/update-payment`;
-        await axios.post(userServiceUrl, { payment: amount });
-        res.status(200).json({ message: "Payment processed and user updated" });
-    } catch (error) {
-        console.error("ERROR communicating with User Service:", error.message);
-        res.status(500).json({ error: "Failed to update user payment" });
-    }
+    // Update the payment directly in the database
+    pool.execute(
+        "UPDATE users SET payment = ? WHERE id = ?",
+        [amount, userId],
+        (err, results) => {
+            if (err) {
+                console.error("ERROR updating payment:", err.message);
+                return res.status(500).json({ error: "Failed to update payment in DB" });
+            }
+
+            if (results.affectedRows === 0) {
+                return res.status(404).json({ error: "User not found" });
+            }
+
+            res.status(200).json({ message: "Payment processed and user updated in DB" });
+        }
+    );
 });
 
 // Serve HTML UI
@@ -41,4 +57,4 @@ app.get("/health", (req, res) => {
 });
 
 const PORT = 3000;
-app.listen(PORT, () => console.log(`Payment Service running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Payment Service RUNNING on port ${PORT}`));
