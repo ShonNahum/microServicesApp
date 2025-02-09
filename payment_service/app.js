@@ -9,10 +9,11 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Create a MySQL connection pool
 const pool = mysql.createPool({
-    host: "mysql-db",  // Change to your DB host if needed
-    user: "root",       // Change to your DB user
-    password: "rootpassword", // Change to your DB password
-    database: "user_service_db"  // Change to your DB name
+    host: "mysql-db",  // MySQL service name or IP address
+    port: 3306,        // Default MySQL port
+    user: "root",      // MySQL username
+    password: "rootpassword", // MySQL password
+    database: "user_service_db"  // Database name
 });
 
 // Endpoint to handle payment
@@ -57,4 +58,4 @@ app.get("/health", (req, res) => {
 });
 
 const PORT = 3000;
-app.listen(PORT, () => console.log(`Payment Service RUNNING on port ${PORT}`));
+app.listen(PORT, () => console.log(`Payment Service running on port ${PORT}`));

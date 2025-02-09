@@ -42,4 +42,3 @@ kubectl get ingress --all-namespaces
 
 ** added init container for DB to create the Table my code needed to work **
 
-becuase i dont have ingress, in payment the user_add is hardcoded :( so we need check it out everytime we run 
