@@ -1,0 +1,17 @@
+user_view:
+  port: 5001
+
+user_add:
+  port: 5000
+
+payment_service:
+  port: 3000 
+
+mysql_db:
+  port: 3306
+  MYSQL_ROOT_PASSWORD: rootpassword
+  MYSQL_DATABASE: user_service_db
+  MYSQL_USER: root
+  
+service_type: LoadBalancer
+

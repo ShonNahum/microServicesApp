@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-view-deployment
+  labels:
+    app: user-view
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-view
+  template:
+    metadata:
+      labels:
+        app: user-view
+    spec:
+      containers:
+      - name: user-view
+        image: shonnahum/microservices:user_view
+        ports:
+        - containerPort: {{ .Values.user_view.port }}
+        envFrom:
+        - configMapRef:
+            name: microservices-config

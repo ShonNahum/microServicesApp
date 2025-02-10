@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-add-deployment
+  labels:
+    app: user-add
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-add
+  template:
+    metadata:
+      labels:
+        app: user-add
+    spec:
+      containers:
+      - name: user-add
+        image: shonnahum/microservices:user_add
+        ports:
+        - containerPort: {{ .Values.user_add.port }}
+        envFrom:
+        - configMapRef:
+            name: microservices-config
