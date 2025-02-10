@@ -13,7 +13,9 @@ const pool = mysql.createPool({
     port: 3306,        // Default MySQL port
     user: "root",      // MySQL username
     password: "rootpassword", // MySQL password
-    database: "user_service_db"  // Database name
+    database: "user_service_db", // Database name
+    waitForConnections: true,
+    connectionLimit: 20,
 });
 
 // Endpoint to handle payment
@@ -58,4 +60,4 @@ app.get("/health", (req, res) => {
 });
 
 const PORT = 3000;
-app.listen(PORT, () => console.log(`Payment Service running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Payment Service RUN on port ${PORT}`));

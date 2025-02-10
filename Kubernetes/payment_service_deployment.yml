@@ -17,6 +17,7 @@ spec:
       containers:
       - name: payment-service
         image: shonnahum/microservices:payment_services
+        imagePullPolicy: Always
         ports:
         - containerPort: 3000
         envFrom:

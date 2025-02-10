@@ -1,8 +1,7 @@
 services:
 
   user_view:
-    build:
-      context: ./user_view
+    image: shonnahum/microservices:user_view
     container_name: user_view
     ports:
       - "5001:5001"
@@ -22,8 +21,7 @@ services:
 
 
   user_add:
-    build:
-      context: ./user_add
+    image: shonnahum/microservices:user_add
     container_name: user_add
     ports:
       - "5000:5000"
@@ -59,8 +57,7 @@ services:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
   payment_service:
-    build:
-      context: ./payment_service
+    image: shonnahum/microservices:payment_services
     container_name: payment_services
     ports:
       - "3000:3000"
