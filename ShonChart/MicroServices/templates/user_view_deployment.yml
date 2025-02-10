@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: user-view
-        image: shonnahum/microservices:user_view
+        image: {{ .Values.user_view.image }}
         ports:
         - containerPort: {{ .Values.user_view.port }}
         envFrom:

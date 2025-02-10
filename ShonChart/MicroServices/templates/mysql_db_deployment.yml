@@ -15,7 +15,7 @@ spec:
         app: mysql-db
     spec:
       containers:
-        - name: mysql-db
+        - name: {{ .Values.mysql_db.image }}
           image: mysql:8.0
           ports:
             - containerPort: {{ .Values.mysql_db.port }}

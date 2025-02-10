@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: payment-service
-        image: shonnahum/microservices:payment_services
+        image: {{ .Values.payment_service.image }}
         imagePullPolicy: Always
         ports:
         - containerPort: {{ .Values.payment_service.port }}

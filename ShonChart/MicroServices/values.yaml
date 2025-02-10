@@ -1,13 +1,17 @@
 user_view:
   port: 5001
+  image: shonnahum/microservices:user_view
 
 user_add:
   port: 5000
+  image: shonnahum/microservices:user_add
 
 payment_service:
   port: 3000 
+  image: shonnahum/microservices:payment_services
 
 mysql_db:
+  image: mysql-db
   port: 3306
   MYSQL_ROOT_PASSWORD: rootpassword
   MYSQL_DATABASE: user_service_db

@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: user-add
-        image: shonnahum/microservices:user_add
+        image: {{ .Values.user_add.image }}
         ports:
         - containerPort: {{ .Values.user_add.port }}
         envFrom:
