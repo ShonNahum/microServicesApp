@@ -17,4 +17,5 @@ https://hub.docker.com/repository/docker/shonnahum/microservices/general
 
 -  [X] 3 services microservices connected with API calls 
 -  [X] Connect to Jenkins automatically and connect my Jenkinsfiles that in every Microservices Application folder and every Trigger it Docker image them and push them to my repo in dockerhub
--  [ ] Deploy it all in Kubernetes - using deployment & Service for every Microservice project And Configmap
+-  [X] Deploy it all in Kubernetes - using deployment & Service for every Microservice project And Configmap
+-  [X] Deploy it all in Chart & With ArgoCD - using templates , values and etc..
