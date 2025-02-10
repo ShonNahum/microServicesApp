@@ -42,3 +42,5 @@ kubectl get ingress --all-namespaces
 
 ** added init container for DB to create the Table my code needed to work **
 
+
+PUT HORBOR AS ARTIFACTORY 
